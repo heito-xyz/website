@@ -1,3 +1,7 @@
+// * Types
+import { languages, type CodeName } from './types/locale';
+
+
 export default defineNuxtConfig({
     devtools: {
         enabled: true
@@ -17,6 +21,16 @@ export default defineNuxtConfig({
 
     hxUI: {
         prefix: ''
+    },
+
+    i18n: {
+        strategy: 'no_prefix',
+        defaultLocale: 'en',
+        locales: Object.keys(languages).map(code => ({
+            code,
+            name: languages[code as CodeName].name,
+            file: code + '.json'
+        }))
     },
 
     runtimeConfig: {
