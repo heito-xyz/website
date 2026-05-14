@@ -1,0 +1,37 @@
+{
+  "name": "website",
+  "description": "The front-end part for the heito.xyz - website is the author's personal website",
+  "version": "0.0.1",
+  "type": "module",
+  "private": true,
+  "author": {
+    "name": "heito",
+    "email": "me@heito.xyz",
+    "url": "https://heito.xyz"
+  },
+  "homepage": "https://heito.xyz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/heito-xyz/website"
+  },
+  "keywords": [
+    "nuxt",
+    "vue",
+    "websocket",
+    "typescript",
+    "website"
+  ],
+  "scripts": {
+    "build": "nuxt build",
+    "build:vercel": "NITRO_PRESET=vercel-edge nuxt build",
+    "dev": "nuxt dev",
+    "generate": "nuxt generate",
+    "preview": "nuxt preview",
+    "postinstall": "nuxt prepare"
+  },
+  "dependencies": {
+    "nuxt": "^4.4.5",
+    "vue": "^3.5.34",
+    "vue-router": "^5.0.6"
+  }
+}
