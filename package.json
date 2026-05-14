@@ -24,13 +24,18 @@
   "scripts": {
     "build": "nuxt build",
     "build:vercel": "NITRO_PRESET=vercel-edge nuxt build",
-    "dev": "nuxt dev",
+    "dev": "nuxt dev --port 16000",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
     "postinstall": "nuxt prepare"
   },
   "dependencies": {
+    "@heito/hxui": "^1.0.18",
+    "@nuxtjs/i18n": "^10.3.0",
+    "@pinia/nuxt": "^0.11.3",
     "nuxt": "^4.4.5",
+    "pinia": "^3.0.4",
+    "sass": "^1.99.0",
     "vue": "^3.5.34",
     "vue-router": "^5.0.6"
   }

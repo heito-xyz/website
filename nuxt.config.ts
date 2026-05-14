@@ -1,5 +1,26 @@
-// https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
-  compatibilityDate: '2025-07-15',
-  devtools: { enabled: true }
-})
+    devtools: {
+        enabled: true
+    },
+
+    css: ['~/assets/styles/root.scss'],
+
+    modules: [
+        '@heito/hxui/nuxt',
+        '@pinia/nuxt',
+        '@nuxtjs/i18n'
+    ],
+
+    pinia: {
+        storesDirs: ['./stores/**']
+    },
+
+    hxUI: {
+        prefix: ''
+    },
+
+    runtimeConfig: {
+        apiUrl: process.env.API_URL || 'https://api.heito.xyz',
+        wsUrl: process.env.WS_URL || 'wss://api.heito.xyz',
+    }
+});
