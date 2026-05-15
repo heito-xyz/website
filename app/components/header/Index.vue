@@ -14,6 +14,24 @@
 
         <div style="margin-left: auto;"></div>
 
+        <Group class="header-toggles">
+            <Tooltip side="bottom">
+                <template #trigger>
+                    <Button
+                        variant="ghost"
+                        
+                        @click="$notifications.setOpen(!$notifications.isOpened)"
+                    >
+                        <Bell/>
+                    </Button>
+                </template>
+
+                <template #default>
+                    <span>{{ $t('notifications') }}</span>
+                </template>
+            </Tooltip>
+        </Group>
+
         <div class="super-menu-toggle"
             @click="$emit('openSuperMenu')"
         >
@@ -25,6 +43,14 @@
 </template>
 
 <script lang="ts" setup>
+
+// * Icons
+import { Bell } from 'lucide-vue-next';
+
+
+// * Stores
+const { $notifications } = useNotificationsStore();
+
 
 const $emit = defineEmits({
     openSuperMenu() {}
@@ -55,10 +81,28 @@ header {
 
     a {
         color: var(--text-primary);
+        font-size: 14px;
         text-decoration: none;
 
         &:hover {
             text-decoration: underline;
+        }
+    }
+}
+
+:deep(.header-toggles) {
+    margin-right: 12px;
+
+    .ui-button {
+        padding: 0;
+        width: 24px;
+        min-height: 24px;
+        height: 24px;
+        border-right: none !important;
+
+        svg {
+            width: 14px;
+            height: 14px;
         }
     }
 }

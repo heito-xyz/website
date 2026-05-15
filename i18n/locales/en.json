@@ -5,5 +5,7 @@
     },
     "ecosystem": "Ecosystem",
     "support": "Support",
-    "info": "Information"
+    "info": "Information",
+    "notifications": "Notifications",
+    "emptyNotificationList": "It's a little empty so far . . ."
 }

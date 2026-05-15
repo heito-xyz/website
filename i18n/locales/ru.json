@@ -5,5 +5,7 @@
     },
     "ecosystem": "Экосистема",
     "support": "Поддержка",
-    "info": "Информация"
+    "info": "Информация",
+    "notifications": "Уведомления",
+    "emptyNotificationList": "Пока что тут пустовато. . ."
 }

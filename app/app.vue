@@ -3,6 +3,7 @@
         <SuperMenu v-if="isActiveSuperMenu"
             @close="isActiveSuperMenu = false"
         />
+        <Notifications/>
     </ClientOnly>
 
     <NuxtLayout class="layout"
@@ -12,7 +13,9 @@
             @openSuperMenu="isActiveSuperMenu = true"
         />
 
-        <NuxtPage class="page"/>
+        <NuxtPage class="page"
+            :style="{ padding: $route.meta?.header?.padding ?? '0 32px' }"
+        />
 
         <Footer v-if="!$route.meta.flags?.includes('footer:hide')"/>
     </NuxtLayout>
@@ -22,7 +25,8 @@
 
 // * Components
 import Header from '~/components/header/Index.vue';
-import SuperMode from '~/components/super-menu/Index.vue';
+import SuperMenu from '~/components/super-menu/Index.vue';
+import Notifications from '~/components/notifications/Index.vue';
 import Footer from '~/components/footer/Index.vue';
 
 
