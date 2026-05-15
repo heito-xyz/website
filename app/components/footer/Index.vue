@@ -47,7 +47,6 @@
         <div class="border">
             <span style="white-space: nowrap; font-size: 10px;">© {{ new Date().getFullYear() }}, made with ❤️ by heito</span>
         </div>
-
     </footer>
 </template>
 

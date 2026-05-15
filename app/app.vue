@@ -1,6 +1,16 @@
 <template>
-    <NuxtLayout class="layout">
-        <Header v-if="!$route.meta.flags?.includes('header:hide')"/>
+    <ClientOnly>
+        <SuperMenu v-if="isActiveSuperMenu"
+            @close="isActiveSuperMenu = false"
+        />
+    </ClientOnly>
+
+    <NuxtLayout class="layout"
+        :isActiveSuperMenu="isActiveSuperMenu"
+    >
+        <Header v-if="!$route.meta.flags?.includes('header:hide')"
+            @openSuperMenu="isActiveSuperMenu = true"
+        />
 
         <NuxtPage class="page"/>
 
@@ -12,7 +22,11 @@
 
 // * Components
 import Header from '~/components/header/Index.vue';
+import SuperMode from '~/components/super-menu/Index.vue';
 import Footer from '~/components/footer/Index.vue';
+
+
+const isActiveSuperMenu = ref(false);
 
 
 useHead({

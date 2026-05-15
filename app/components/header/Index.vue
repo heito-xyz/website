@@ -14,11 +14,23 @@
 
         <div style="margin-left: auto;"></div>
 
-        <div>A?</div>
+        <div class="super-menu-toggle"
+            @click="$emit('openSuperMenu')"
+        >
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
     </header>
 </template>
 
-<script lang="ts" setup></script>
+<script lang="ts" setup>
+
+const $emit = defineEmits({
+    openSuperMenu() {}
+});
+
+</script>
 
 <style lang="scss" scoped>
 
@@ -51,7 +63,7 @@ header {
     }
 }
 
-.super {
+.super-menu-toggle {
     cursor: pointer;
     display: flex;
     position: relative;
@@ -60,10 +72,16 @@ header {
     flex-direction: column;
     justify-content: space-between;
 
+    &:hover {
+        div {
+            border-color: var(--hx-text-primary);
+        }
+    }
+
     div {
         width: 100%;
         border-radius: 5px;
-        border-bottom: 1px solid var(--background-secondary);
+        border-bottom: 1px solid var(--hx-background-secondary);
         transition: .2s;
     }
 }

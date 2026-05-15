@@ -10,16 +10,27 @@
 import type { HTMLAttributes } from 'vue';
 
 
+const props = defineProps<{
+    isActiveSuperMenu: boolean;
+}>();
+
+
 const squares = ref<Array<[number, number]>>([]);
 
 
 const styles = computed<HTMLAttributes['style']>(() => {
+    const length = squares.value.length;
+
+    if (length < 1) return {};
+
     return {
-        // maskImage: new Array(squares.value.length).fill(`linear-gradient(to bottom, #010101, #010101)`).join(','),
-        // maskSize: `${size}px ${size}px`,
-        // maskPosition: squares.value.map(([x, y]) => `${x}px ${y}px`).join(','),
-        // maskRepeat: 'no-repeat',
-        // filter: 'grayscale(.5)'
+        maskImage: new Array(length).fill(`linear-gradient(to bottom, #010101, #010101)`).join(','),
+        maskSize: `${size}px ${size}px`,
+        maskPosition: squares.value.map(([x, y]) => `${x}px ${y}px`).join(','),
+        maskRepeat: 'no-repeat',
+        filter: 'grayscale(.95)',
+        pointerEvents: 'none',
+        userSelect: 'none'
     }
 });
 
@@ -32,7 +43,7 @@ function randomInt(min: number = 0, max: number = 10) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
 }
 
-onMounted(async () => {
+async function renderEffect() {
     const maxHorizontal = Math.floor(window.innerWidth / size);
     const maxVertical = Math.floor(window.innerHeight / size);
     const length = (maxVertical + maxHorizontal) * 2;
@@ -54,6 +65,18 @@ onMounted(async () => {
             squares.value.push([x, y]);
         }
     }
+}
+
+
+watch(() => props.isActiveSuperMenu, async value => {
+    if (value === true) renderEffect();
+    else {
+        for (let i = squares.value.length; i >= 0; i--) {
+            await new Promise(r => setTimeout(() => r(true)));
+            
+            squares.value.splice(i, 1);
+        }
+    }
 });
 
 </script>
@@ -61,8 +84,8 @@ onMounted(async () => {
 <style lang="scss" scoped>
 
 .default {
-    // pointer-events: none;
-    // user-select: none;
+    transition: filter .2s, mask-image .2s;
+    filter: grayscale(0);
 }
 
 </style>
