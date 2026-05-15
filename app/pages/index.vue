@@ -31,7 +31,7 @@ useSeoMeta({
 
     h1 {
         font-size: 128px;
-        font-family: "Playfair Display", serif;
+        font-family: 'Cormorant Garamond', serif;
         text-transform: uppercase;
     }
 

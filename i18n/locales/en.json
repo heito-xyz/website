@@ -1,5 +1,6 @@
 {
     "home": "Home",
+    "language": "Language",
     "footer": {
         "text": "Why this website? I have no idea.\nI just sat there bored and bored. I hope you haven't gotten any worse."
     },
@@ -7,5 +8,8 @@
     "support": "Support",
     "info": "Information",
     "notifications": "Notifications",
-    "emptyNotificationList": "It's a little empty so far . . ."
+    "emptyNotificationList": "It's a little empty so far . . .",
+    "settings": "Settings",
+    "darkTheme": "Dark theme",
+    "lightTheme": "Light theme"
 }
