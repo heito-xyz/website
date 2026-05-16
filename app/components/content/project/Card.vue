@@ -38,7 +38,7 @@
                 <li v-for="(tag, idx) of project?.tags" :key="idx">{{ tag }}</li>
             </ul>
 
-            <div class="date">26 мая 2026</div>
+            <div class="date">{{ $time.timeago(project.createdAt) }}</div>
         </div>
     </div>
 </template>
@@ -47,6 +47,10 @@
 
 // * Types
 import type { Project } from '~~/types/api/project';
+
+
+// * Composables
+const $time = useTime();
 
 
 const props = defineProps<{
@@ -105,6 +109,7 @@ const props = defineProps<{
 
             span {
                 max-width: 100%;
+                color: #fff;
                 font-size: 32px;
                 font-weight: 700;
                 font-family: 'Cormorant Garamond', serif;
@@ -118,7 +123,7 @@ const props = defineProps<{
         .description {
             display: -webkit-box;
             margin: 8px 0 24px 0;
-            color: var(--hx-text-secondary);
+            color: #fff;
             line-clamp: 2;
             text-overflow: ellipsis;
             mix-blend-mode: difference;
@@ -184,30 +189,35 @@ const props = defineProps<{
         }
 
         .date {
-            color: var(--text-secondary);
+            color: #fff;
             font-size: 12px;
             white-space: nowrap;
+            mix-blend-mode: difference;
         }
 
         ul.tags {
             display: flex;
+            width: 100%;
             margin-left: auto;
             align-items: center;
-            justify-content: flex-end;
+            list-style-type: none;
+            mask-image: linear-gradient(90deg, #000 85%, transparent 100%);
             overflow: hidden;
+            user-select: none;
 
             li {
-                margin: 0 8px 0 0;
                 padding: 4px 8px;
+                color: var(--hx-text-secondary);
                 font-size: 12px;
                 white-space: nowrap;
                 border-radius: 5px;
-                background-color: #00000055;
+                border: 1px solid var(--hx-background-transparent);
+                background-color: var(--hx-background-secondary);
                 backdrop-filter: blur(5px);
                 transition: .2s;
 
-                &:last-child {
-                    margin: 0;
+                &:not(:last-child) {
+                    margin-right: 4px;
                 }
             }
         }

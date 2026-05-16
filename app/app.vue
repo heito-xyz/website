@@ -40,7 +40,7 @@ useHead({
     },
     htmlAttrs: {
         lang: locale || 'en',
-        class: import.meta.server ? 'dark' : (localStorage['theme'] === 'dark' ? 'dark' : 'light')
+        class: import.meta.server ? 'dark' : (localStorage['theme'] === 'light' ? 'light' : 'dark')
     }
 });
 
@@ -62,6 +62,7 @@ useHead({
     height: 100dvh !important;
     min-height: 100dvh !important;
     overflow-x: hidden;
+    z-index: 1;
 }
 
 </style>

@@ -14,6 +14,14 @@ useSeoMeta({
     title: 'Home'
 });
 
+definePageMeta({
+    label: 'home',
+    index: 1,
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQWe0hb94065HccI7bFMuFZLpUo7iXN9gxjQ&s',
+    icon: 'Eclipse',
+    description: 'Lorem ipsum dolor sit amet consectetur, adipisicing elit. Est laudantium esse aut libero blanditiis vitae aperiam, nobis possimus porro amet nisi alias illo maxime obcaecati molestias rem aspernatur ab. Explicabo.'
+});
+
 </script>
 
 <style lang="scss" scoped>

@@ -77,7 +77,7 @@ const root = ref<HTMLElement | null>(null);
 
 const isActived = ref(false);
 const readyAvatar = ref(false);
-const darkTheme = ref(import.meta.server ? true : localStorage['theme'] === 'dark');
+const darkTheme = ref(import.meta.server ? true : localStorage['theme'] !== 'light');
 
 
 function handleAvatar() {
@@ -150,7 +150,7 @@ onMounted(() => {
         border: 1px dashed var(--hx-background-transparent);
         border-radius: var(--hx-border-radius);
         background-color: #00000055;
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(5px);
 
         header {
             margin-bottom: 8px;

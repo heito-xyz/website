@@ -7,31 +7,33 @@
         <Transition name="fade">
             <div class="super-menu" v-if="isActiveSuperMenu">
                 <div class="close" @click="$emit('closeSuperMenu')">
-                    <span>Close</span>
+                    <span>{{ $t('close') }}</span>
                     <X/>
                 </div>
                 
-                <ul class="links">
-                    <NuxtLink v-for="(link, idx) of links" :key="idx"
-                        :to="link.path"
+                <ul class="pages">
+                    <NuxtLink v-for="(page, idx) of pages" :key="idx"
+                        :to="page.path"
                         :class="idx % 2 === 1 ? 'reverse' : ''"
         
                         @click="$emit('closeSuperMenu')"
                         @mouseenter="selectedLinkIndex = idx"
                     >
                         <li>
-                            <span>{{ link.label }}</span>
-                            <component :is="icons[link.icon || 'X']"/>
+                            <span>{{ $t(page.label) }}</span>
+                            <component :is="icons[page.icon || 'X']"/>
                         </li>
                     </NuxtLink>
                 </ul>
         
                 <div class="content" v-if="selectedLink !== null">
-                    <img :src="selectedLink.banner" alt="" :style="`transform: rotate(${2 * (selectedLinkIndex % 2 === 1 ? 1 : -1)}deg);`">
-        
+                    <div :style="`transform: rotate(${2 * (selectedLinkIndex % 2 === 1 ? 1 : -1)}deg);`">
+                        <Image :src="selectedLink.image"/>
+                    </div>
+
                     <h1>{{ selectedLink.label }}</h1>
         
-                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquid unde animi perspiciatis a, provident adipisci qui! Magni, nobis. Error accusamus corporis iusto cumque vitae corrupti voluptatum, quo quis est cum?</p>
+                    <p>{{ selectedLink.description }}</p>
                 </div>
             </div>
         </Transition>
@@ -41,11 +43,22 @@
 <script lang="ts" setup>
 
 // * Icons
-import { X, Bookmark } from 'lucide-vue-next';
+import { X } from 'lucide-vue-next';
 import * as icons from 'lucide-vue-next';
 
 // * Types
 import type { HTMLAttributes } from 'vue';
+
+interface CustomPage {
+    label: string;
+    path: string;
+    icon: string;
+    image: string;
+    description: string;
+}
+
+
+const $router = useRouter();
 
 
 const $emit = defineEmits({
@@ -73,78 +86,61 @@ const styles = computed<HTMLAttributes['style']>(() => {
         maskRepeat: 'no-repeat',
         filter: 'grayscale(.95)',
         pointerEvents: 'none',
-        userSelect: 'none'
+        userSelect: 'none',
+        opacity: .5
     }
 });
 
 const selectedLink = computed(() => {
-    return links[selectedLinkIndex.value] || null;
+    return pages[selectedLinkIndex.value] || null;
 });
 
 
 const size = 128;
 
-const links: Array<{ label: string, path: string, icon: string, banner: string }> = [
-    {
-        label: 'Home',
-        path: '/',
-        icon: 'Eclipse',
-        banner: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRQWe0hb94065HccI7bFMuFZLpUo7iXN9gxjQ&s'
-    },
-    {
-        label: 'Projects',
-        path: '/projects',
-        icon: 'Presentation',
-        banner: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAMTRwGgkfm2jFi8HwIwmaZZFTfaxt83SelA&s'
-    },
-    {
-        label: 'Repositories',
-        path: '/repositories',
-        icon: 'GitBranch',
-        banner: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTNDIgxXadjBKxqLrCfBOZwj2HPEMI8Zfnylg&s'
-    },
-    {
-        label: 'Blogs',
-        path: '/blogs',
-        icon: 'Images',
-        banner: 'https://img.magnific.com/free-photo/closeup-shot-beautiful-butterfly-with-interesting-textures-orange-petaled-flower_181624-7640.jpg?semt=ais_hybrid&w=740&q=80'
-    },
-    {
-        label: 'Music',
-        path: '/music',
-        icon: 'Music',
-        banner: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9L-TFxYyUeOOlCsMX2pf8nhdhj3Rpq4sUKg&s'
-    },
-    {
-        label: 'Stats',
-        path: '/stats/code',
-        icon: 'Code',
-        banner: 'https://vsthemes.org/uploads/posts/2017-08/1582034162_universe-full-hd-pc_vsthemes_ru-1.webp'
-    },
-    {
-        label: 'Documentations',
-        path: '/docs',
-        icon: 'FileCodeCorner',
-        banner: 'https://avatars.mds.yandex.net/i?id=764fdf4c9e303d3396e49143cb615d8df4fbfec6-6536283-images-thumbs&n=13'
-    },
-    {
-        label: 'Watch',
-        path: '/watch',
-        icon: 'Film',
-        banner: 'https://image.fonwall.ru/o/xx/hd-background-free-wallpaper-factory.jpg?auto=compress&fit=crop&h=282&w=500&domain=img1.fonwall.ru'
-    },
-    {
-        label: 'Games',
-        path: '/games',
-        icon: 'Gamepad2',
-        banner: 'https://img.freepik.com/free-photo/majestic-mountain-peak-tranquil-winter-landscape-generated-by-ai_188544-15662.jpg?semt=ais_hybrid&w=740&q=80'
-    },
-    {
-        label: 'About',
-        path: '/about',
-        icon: 'Info',
-        banner: 'https://c4.wallpaperflare.com/wallpaper/764/505/66/baby-groot-4k-hd-superheroes-wallpaper-preview.jpg'
-    }
+const pages: Array<CustomPage> = [
+    // {
+    //     label: 'Blogs',
+    //     path: '/blogs',
+    //     icon: 'Images',
+    //     banner: 'https://img.magnific.com/free-photo/closeup-shot-beautiful-butterfly-with-interesting-textures-orange-petaled-flower_181624-7640.jpg?semt=ais_hybrid&w=740&q=80'
+    // },
+    // {
+    //     label: 'Music',
+    //     path: '/music',
+    //     icon: 'Music',
+    //     banner: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ9L-TFxYyUeOOlCsMX2pf8nhdhj3Rpq4sUKg&s'
+    // },
+    // {
+    //     label: 'Stats',
+    //     path: '/stats/code',
+    //     icon: 'Code',
+    //     banner: 'https://vsthemes.org/uploads/posts/2017-08/1582034162_universe-full-hd-pc_vsthemes_ru-1.webp'
+    // },
+    // {
+    //     label: 'Documentations',
+    //     path: '/docs',
+    //     icon: 'FileCodeCorner',
+    //     banner: 'https://avatars.mds.yandex.net/i?id=764fdf4c9e303d3396e49143cb615d8df4fbfec6-6536283-images-thumbs&n=13'
+    // },
+    // {
+    //     label: 'Watch',
+    //     path: '/watch',
+    //     icon: 'Film',
+    //     banner: 'https://image.fonwall.ru/o/xx/hd-background-free-wallpaper-factory.jpg?auto=compress&fit=crop&h=282&w=500&domain=img1.fonwall.ru'
+    // },
+    // {
+    //     label: 'Games',
+    //     path: '/games',
+    //     icon: 'Gamepad2',
+    //     banner: 'https://img.freepik.com/free-photo/majestic-mountain-peak-tranquil-winter-landscape-generated-by-ai_188544-15662.jpg?semt=ais_hybrid&w=740&q=80'
+    // },
+    // {
+    //     label: 'About',
+    //     path: '/about',
+    //     icon: 'Info',
+    //     banner: 'https://c4.wallpaperflare.com/wallpaper/764/505/66/baby-groot-4k-hd-superheroes-wallpaper-preview.jpg'
+    // }
 ];
 
 
@@ -156,8 +152,6 @@ async function renderEffect() {
     const maxHorizontal = Math.floor(window.innerWidth / size);
     const maxVertical = Math.floor(window.innerHeight / size);
     const length = (maxVertical + maxHorizontal) * 2;
-
-    console.log('size', maxVertical, maxHorizontal, length)
 
     for (let i = 0; i < length; i++) {
         await new Promise(r => setTimeout(() => r(true)));
@@ -185,6 +179,30 @@ watch(() => props.isActiveSuperMenu, async value => {
             
             squares.value.splice(i, 1);
         }
+    }
+});
+
+
+onMounted(() => {
+    const routes = $router.getRoutes()
+        .filter((route, index, self) => {
+            return route.meta.index !== undefined && index === self.findIndex(r => r.name === route.name);
+        }).sort((a, b) => {
+            return a.meta?.index! > b.meta?.index! ? 1 : -1;
+        });
+
+    for (const route of routes) {
+        const { label, icon, image, description } = route.meta;
+
+        if (!label || !icon || !image || !description) continue;
+
+        pages.push({
+            label,
+            path: route.path,
+            icon,
+            image,
+            description
+        });
     }
 });
 
@@ -240,16 +258,16 @@ watch(() => props.isActiveSuperMenu, async value => {
     }
 }
 
-ul.links {
+ul.pages {
     display: flex;
     margin-bottom: 32px;
     list-style-type: none;
     flex-direction: column;
-    background-color: var(--hx-background-primary);
 
     a {
         padding: 8px 24px;
         position: relative;
+        background-color: var(--hx-background-primary);
         transition: .2s;
 
         &:active {
@@ -313,7 +331,7 @@ ul.links {
     align-self: start;
     z-index: 2;
 
-    img {
+    :deep(.ui-image) {
         margin-bottom: 24px;
         width: 100%;
         // height: 215px;

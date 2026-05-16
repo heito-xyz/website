@@ -71,7 +71,7 @@ const isBlured = ref(false);
 function handleLayoutScroll(event: Event) {
     const target = event.target as HTMLDivElement;
 
-    isBlured.value = target.scrollTop >= 10;
+    isBlured.value = target.scrollTop >= 1;
 }
 
 
@@ -94,7 +94,7 @@ onUnmounted(() => {
 header {
     display: flex;
     padding: 0 32px;
-    width: 100vw;
+    //width: 100vw;
     height: 64px;
     position: sticky;
     top: 0;
@@ -103,7 +103,7 @@ header {
     align-items: center;
     justify-content: space-between;
     box-sizing: border-box;
-    transition: .2s;
+    transition: .2s, heigth .1s;
     z-index: 100;
 
     &.blur {

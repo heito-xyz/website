@@ -1,6 +1,6 @@
 <template>
     <main class="projects">
-        <Group>
+        <Group class="toolbar">
             <Input style="width: 100%;"
                 placeholder="Search projects"
                 :value="text"
@@ -172,7 +172,7 @@ function createProject() {
             }
         ],
         repos: [],
-        tags: ['test'],
+        tags: ['test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test'],
         updatedAt: new Date().toISOString(),
         createdAt: new Date().toISOString()
     });
@@ -184,6 +184,11 @@ useSeoMeta({
 });
 
 definePageMeta({
+    label: 'projects',
+    index: 2,
+    icon: 'Presentation',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAMTRwGgkfm2jFi8HwIwmaZZFTfaxt83SelA&s',
+    description: 'ads',
     header: {
         padding: '0 20%'
     }
@@ -194,6 +199,13 @@ definePageMeta({
 <style lang="scss" scoped>
 
 .page.projects {
+    .toolbar {
+        position: sticky;
+        top: 64px;
+        left: 0;
+        z-index: 1;
+    }
+
     .grid {
         display: grid;
         margin-top: 12px;
