@@ -11,7 +11,7 @@
 <script lang="ts" setup>
 
 useSeoMeta({
-    title: 'Home'
+    title: () => $t('home')
 });
 
 definePageMeta({

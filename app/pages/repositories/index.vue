@@ -164,7 +164,7 @@ onMounted(() => {
 
 
 useSeoMeta({
-    title: 'Home'
+    title: () => $t('repositories')
 });
 
 definePageMeta({

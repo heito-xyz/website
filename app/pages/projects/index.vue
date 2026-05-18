@@ -49,12 +49,14 @@
                 @select="sortBy = $event.value"
             />
 
-            <Button
-                @click="createProject"
+            <NuxtLink style="margin-left: auto;"
+                to="/project/new"
             >
-                <Plus/>
-                <span style="white-space: nowrap;">Create project</span>
-            </Button>
+                <Button>
+                    <Plus/>
+                    <span style="white-space: nowrap;">Create project</span>
+                </Button>
+            </NuxtLink>
         </Group>
 
         <Alert style="margin-top: 12px;" v-if="projects.length < 1">
@@ -62,12 +64,14 @@
             <template #title>Список проектов пуст</template>
             <template #default>По данному запросу проекты не найдены.</template>
             <template #action>
-                <Button style="margin-left: auto;"
-                    @click="createProject"
+                <NuxtLink style="margin-left: auto;"
+                    to="/project/new"
                 >
-                    <Plus/>
-                    <span>Create project</span>
-                </Button>
+                    <Button>
+                        <Plus/>
+                        <span>Create project</span>
+                    </Button>
+                </NuxtLink>
             </template>
         </Alert>
 
@@ -117,70 +121,9 @@ function onSearchText(value: string) {
     }, 500);
 }
 
-function createProject() {
-    const name = Math.random().toString();
-    projects.value.push({
-        name,
-        displayName: 'Test' + name,
-        description: name.repeat(3),
-        color: '#9af023',
-        banner: 'https://img.magnific.com/free-photo/soft-gradient-background_23-2150525049.jpg?semt=ais_hybrid&w=740&q=80',
-        image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLzjOH0f3YQwFP2RCrh2QDMPTS11hhfyzIDQ&s',
-        links: [],
-        members: [
-            {
-                member: 'heito',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            },
-            {
-                member: 'heito2',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            },
-            {
-                member: 'heito3',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            },
-            {
-                member: 'heito4',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            },
-            {
-                member: 'bobiclaki',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            },
-            {
-                member: 'MusicMini',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            },
-            {
-                member: 'heitoke',
-                permission: 2,
-                updatedAt: 's',
-                joinedAt: 's'
-            }
-        ],
-        repos: [],
-        tags: ['test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test','test'],
-        updatedAt: new Date().toISOString(),
-        createdAt: new Date().toISOString()
-    });
-}
-
 
 useSeoMeta({
-    title: 'Home'
+    title: () => $t('projects')
 });
 
 definePageMeta({

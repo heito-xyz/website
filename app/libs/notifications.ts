@@ -112,10 +112,16 @@ export class StoreGroups extends Array<StoreGroup> {
         super();
     }
 
-    create(group: Group) {
+    public create(group: Group) {
         const newGroup = new StoreGroup(group, this.dataNotifications);
 
         return newGroup;
+    }
+
+    public has(groupName: string) {
+        const groupIndex = this.findIndex(group => group.name === groupName);
+
+        return groupIndex > -1;
     }
 }
 
@@ -143,8 +149,16 @@ export class Notifications extends Array<StoreNotification> {
         return this.findIndex(notify => notify.id === notifyId);
     }
 
-    public has(notifyId: number) {
-        return this.getIndex(notifyId) >= 0;
+    public has(notifyId: number): boolean;
+    public has(name: string): boolean;
+    public has(notifyIdOrName: number | string): boolean {
+        if (typeof notifyIdOrName === 'number') {
+            return this.getIndex(notifyIdOrName) > -1;
+        }
+
+        const notifyIndex = this.findIndex(notify => notify.name === notifyIdOrName);
+
+        return notifyIndex > -1;
     }
 
     public get(notifyId: number) {
