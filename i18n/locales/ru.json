@@ -2,6 +2,7 @@
     "home": "Главная",
     "projects": "Проекты",
     "repositories": "Репозитории",
+    "blogs": "Блоги",
     "language": "Язык",
     "footer": {
         "text": "Зачем этот сайт? Понятия не имею.\nПросто сидел скучал и наваял. Надеюсь, тебе не стало хуже. (с)"
@@ -26,5 +27,6 @@
         "seconds_ago": "{count} секунду | {count} секунды | {count} секунд",
         "minutes_ago": "{count} минуту | {count} минуты | {count} минут",
         "hours_ago": "{count} час | {count} часа | {count} часов"
-    }
+    },
+    "members": "Участники"
 }

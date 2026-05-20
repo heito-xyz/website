@@ -2,6 +2,7 @@
     "home": "Home",
     "projects": "Projects",
     "repositories": "Repositories",
+    "blogs": "Blogs",
     "language": "Language",
     "footer": {
         "text": "Why this website? I have no idea.\nI just sat there bored and bored. I hope you haven't gotten any worse."
@@ -26,5 +27,6 @@
         "seconds_ago": "{count} second | {count} seconds",
         "minutes_ago": "{count} minute | {count} minutes",
         "hours_ago": "{count} hour | {count} hours"
-    }
+    },
+    "members": "Members"
 }

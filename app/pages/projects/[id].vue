@@ -91,12 +91,27 @@
         </div>
 
         <div class="content">
-            <Group style="justify-content: start;" class="toolbar">
-                <Button :variant="'secondary'">
-                    <span>Blogs</span>
-                </Button>
+            <Group style="margin-bottom: 12px; justify-content: start;" class="toolbar">
+                <NuxtLink :to="`/project/${$route.params.id}/members`">
+                    <Button :variant="$route.name === 'projects-id-members' ? 'default' : 'secondary'">
+                        <span>{{ $t('members') }}</span>
+                    </Button>
+                </NuxtLink>
+
+                <NuxtLink :to="`/project/${$route.params.id}/blogs`">
+                    <Button :variant="$route.name === 'projects-id-blogs' ? 'default' : 'secondary'">
+                        <span>{{ $t('blogs') }}</span>
+                    </Button>
+                </NuxtLink>
+
+                <NuxtLink :to="`/project/${$route.params.id}/repositories`">
+                    <Button :variant="$route.name === 'projects-id-repositories' ? 'default' : 'secondary'">
+                        <span>{{ $t('repositories') }}</span>
+                    </Button>
+                </NuxtLink>
             </Group>
-            {{ project }}
+            
+            <NuxtPage :project="project"/>
         </div>
     </main>
 </template>
@@ -317,6 +332,7 @@ definePageMeta({
     }
 
     .details {
+        margin-left: 12px;
         padding: 8px;
         border-radius: var(--hx-border-radius);
         background-color: var(--hx-background-secondary);

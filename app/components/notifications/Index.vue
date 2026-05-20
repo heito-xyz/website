@@ -41,7 +41,7 @@
 
                     <span>{{ $t('notifications') }}</span>
                     
-                    <X/>
+                    <X @click="$notifications.setOpen(false)"/>
                 </header>
 
                 <ul>
